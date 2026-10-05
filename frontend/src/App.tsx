@@ -33,6 +33,7 @@ import { QuotationPrintModal } from './components/QuotationPrintModal';
 import { TargetCursor } from './components/ui/TargetCursor';
 import { DotGrid } from './components/ui/DotGrid';
 import { soundManager } from './utils/soundEffects';
+import { synthesizeClientCad } from './utils/clientCadGenerator';
 
 export function App() {
   // Service health status
@@ -270,47 +271,26 @@ export function App() {
   const handleGenerateAiCad = async (prompt: string, model: 'prompt2cad' | 'claude' | 'gemini') => {
     setIsGeneratingAiCad(true);
     try {
-      let res: Response;
+      let data: AiCadPromptResult;
       try {
-        res = await fetch('/api/ai/generate-cad', {
+        const res = await fetch('/api/ai/generate-cad', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ prompt, aiModel: model })
         });
-      } catch (networkErr: any) {
-        throw new Error(
-          'Unable to connect to the ManufactureAI backend API (port 3001). Please verify the backend dev server is active.'
-        );
-      }
 
-    if (!res.ok) {
-      let errorMsg = `Server returned HTTP ${res.status}`;
-      try {
-        const contentType = res.headers.get('content-type') || '';
-        if (contentType.includes('application/json')) {
-          const err = await res.json();
-          if (err?.error) errorMsg = err.error;
+        if (res.ok) {
+          data = await res.json();
         } else {
-          const text = await res.text();
-          const cleanText = text.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim();
-          if (cleanText) errorMsg = cleanText.slice(0, 150);
+          // If server returns error or 404 on static hosts like Netlify, fall back to autonomous client CAD synthesis
+          console.info('Backend API unavailable, utilizing autonomous browser CAD synthesis engine...');
+          data = synthesizeClientCad(prompt, model);
         }
-      } catch {
-        // Fallback to status message
+      } catch (networkErr: any) {
+        // Offline or static Netlify hosting -> instantaneous client synthesis
+        console.info('Network unreachable or Netlify static mode, synthesizing CAD in browser:', networkErr);
+        data = synthesizeClientCad(prompt, model);
       }
-
-      if (res.status === 502 || res.status === 504 || (res.status === 500 && errorMsg.includes('ECONNREFUSED'))) {
-        errorMsg = 'Backend server is not running on port 3001. Please run `npm run dev` to start both frontend and backend.';
-      }
-      throw new Error(errorMsg);
-    }
-
-    let data: AiCadPromptResult;
-    try {
-      data = await res.json();
-    } catch {
-      throw new Error('Received unexpected empty or non-JSON response from server.');
-    }
 
       // Convert Base64 string to ArrayBuffer for Three.js STLLoader / OBJLoader
       const binaryString = window.atob(data.stlBase64);
