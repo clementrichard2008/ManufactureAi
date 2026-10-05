@@ -1,0 +1,485 @@
+import { MaterialProperties } from './types';
+
+export const STANDARD_MATERIALS: MaterialProperties[] = [
+  // --- METALS: LIGHTWEIGHT & STRUCTURAL ALLOYS ---
+  {
+    id: 'al-6061-t6',
+    name: 'Aluminum 6061-T6',
+    category: 'Aluminum',
+    densityGPerCm3: 2.70, // 2700 kg/m^3
+    machinabilityIndex: 190, // Excellent
+    mrrReferenceMm3PerMin: 120000, // 120 cm^3/min
+    typicalRawPricePerKg: 480, // ₹480/kg
+    scrapValueRatio: 0.35,
+    yieldStrengthMpa: 276,
+    tensileStrengthMpa: 310,
+    corrosionResistance: 'Good',
+    hardnessHb: 95,
+    thermalConductivityWPerMK: 167,
+    description: 'Workhorse aerospace and structural aluminum. Outstanding machinability, good strength-to-weight, easily anodized.',
+    continuousServiceTempC: 150,
+    frictionCoefficient: 0.55,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 114.8,
+    chemicalResistanceSummary: 'Resistant to atmospheric moisture and oils; attacked by strong alkalis and halide acids.',
+    wearResistanceRating: 'Moderate'
+  },
+  {
+    id: 'al-7075-t6',
+    name: 'Aluminum 7075-T6',
+    category: 'Aluminum',
+    densityGPerCm3: 2.81,
+    machinabilityIndex: 160,
+    mrrReferenceMm3PerMin: 100000,
+    typicalRawPricePerKg: 850, // ₹850/kg
+    scrapValueRatio: 0.30,
+    yieldStrengthMpa: 503,
+    tensileStrengthMpa: 572,
+    corrosionResistance: 'Moderate',
+    hardnessHb: 150,
+    thermalConductivityWPerMK: 130,
+    description: 'Ultra-high strength zinc-alloyed aircraft aluminum. Comparable strength to many structural steels with 1/3 the mass.',
+    continuousServiceTempC: 120,
+    frictionCoefficient: 0.52,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 203.5,
+    chemicalResistanceSummary: 'Susceptible to stress-corrosion cracking; protective anodizing or alclad layer advised.',
+    wearResistanceRating: 'Moderate'
+  },
+  {
+    id: 'steel-1018',
+    name: 'Mild Steel (AISI 1018)',
+    category: 'Steel',
+    densityGPerCm3: 7.87,
+    machinabilityIndex: 100, // standard baseline
+    mrrReferenceMm3PerMin: 35000,
+    typicalRawPricePerKg: 190, // ₹190/kg
+    scrapValueRatio: 0.15,
+    yieldStrengthMpa: 370,
+    tensileStrengthMpa: 440,
+    corrosionResistance: 'Poor',
+    hardnessHb: 126,
+    thermalConductivityWPerMK: 51.9,
+    description: 'Low-carbon general engineering steel. Excellent weldability, uniform case-hardening, low cost, widely available.',
+    continuousServiceTempC: 400,
+    frictionCoefficient: 0.60,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 55.9,
+    chemicalResistanceSummary: 'Rusts rapidly in humid or outdoor conditions without black oxide, zinc plating, or paint.',
+    wearResistanceRating: 'Moderate'
+  },
+  {
+    id: 'steel-4140',
+    name: 'Alloy Steel (AISI 4140 Q&T)',
+    category: 'Steel',
+    densityGPerCm3: 7.85,
+    machinabilityIndex: 65,
+    mrrReferenceMm3PerMin: 22000,
+    typicalRawPricePerKg: 330, // ₹330/kg
+    scrapValueRatio: 0.15,
+    yieldStrengthMpa: 655,
+    tensileStrengthMpa: 850,
+    corrosionResistance: 'Poor',
+    hardnessHb: 280,
+    thermalConductivityWPerMK: 42.6,
+    description: 'Chromium-molybdenum high tensile steel. Superior fatigue strength, torsional toughness, used for shafts and gears.',
+    continuousServiceTempC: 450,
+    frictionCoefficient: 0.58,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 108.3,
+    chemicalResistanceSummary: 'Requires protective coatings or immersion in oil lubricants to prevent rust.',
+    wearResistanceRating: 'High'
+  },
+  {
+    id: 'ss-304',
+    name: 'Stainless Steel 304',
+    category: 'Stainless Steel',
+    densityGPerCm3: 8.00,
+    machinabilityIndex: 45, // work hardens
+    mrrReferenceMm3PerMin: 18000,
+    typicalRawPricePerKg: 590, // ₹590/kg
+    scrapValueRatio: 0.40,
+    yieldStrengthMpa: 215,
+    tensileStrengthMpa: 505,
+    corrosionResistance: 'Excellent',
+    hardnessHb: 160,
+    thermalConductivityWPerMK: 16.2,
+    description: 'Austenitic stainless steel with 18% Cr and 8% Ni. Sanitary, food/medical safe, exceptional corrosion resistance, work hardens.',
+    continuousServiceTempC: 800,
+    frictionCoefficient: 0.50,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 63.1,
+    chemicalResistanceSummary: 'Immune to nitric acid, food organic acids, sterilization steam; susceptible to high chloride pitting.',
+    wearResistanceRating: 'Moderate'
+  },
+  {
+    id: 'ss-316l',
+    name: 'Stainless Steel 316L',
+    category: 'Stainless Steel',
+    densityGPerCm3: 8.00,
+    machinabilityIndex: 40,
+    mrrReferenceMm3PerMin: 15000,
+    typicalRawPricePerKg: 820, // ₹820/kg
+    scrapValueRatio: 0.45,
+    yieldStrengthMpa: 290,
+    tensileStrengthMpa: 580,
+    corrosionResistance: 'Excellent',
+    hardnessHb: 170,
+    thermalConductivityWPerMK: 15.0,
+    description: 'Marine-grade molybdenum-alloyed stainless. Superior chloride and acid pitting resistance, surgical implants and marine equipment.',
+    continuousServiceTempC: 850,
+    frictionCoefficient: 0.50,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 72.5,
+    chemicalResistanceSummary: 'Outstanding resistance to seawater, brine, bleach, sulfuric and phosphoric acids.',
+    wearResistanceRating: 'Moderate'
+  },
+  {
+    id: 'cast-iron-gray',
+    name: 'Gray Cast Iron (Class 30)',
+    category: 'Cast Iron',
+    densityGPerCm3: 7.20,
+    machinabilityIndex: 110,
+    mrrReferenceMm3PerMin: 45000,
+    typicalRawPricePerKg: 230, // ₹230/kg
+    scrapValueRatio: 0.20,
+    yieldStrengthMpa: 214,
+    tensileStrengthMpa: 214,
+    corrosionResistance: 'Moderate',
+    hardnessHb: 200,
+    thermalConductivityWPerMK: 46.0,
+    description: 'Flake graphite cast iron with high vibration damping, self-lubricating wear resistance, excellent casting properties.',
+    continuousServiceTempC: 450,
+    frictionCoefficient: 0.35,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 29.7,
+    chemicalResistanceSummary: 'Moderate resistance; graphite flakes help retain oil films; rusts without barrier grease.',
+    wearResistanceRating: 'High'
+  },
+  {
+    id: 'brass-c360',
+    name: 'Free-Cutting Brass (C36000)',
+    category: 'Copper/Brass',
+    densityGPerCm3: 8.50,
+    machinabilityIndex: 220, // 100% screw machine standard
+    mrrReferenceMm3PerMin: 140000,
+    typicalRawPricePerKg: 910, // ₹910/kg
+    scrapValueRatio: 0.60,
+    yieldStrengthMpa: 310,
+    tensileStrengthMpa: 400,
+    corrosionResistance: 'Good',
+    hardnessHb: 130,
+    thermalConductivityWPerMK: 115,
+    description: 'Highest machinability index of any metal. Produces fine break-away chips, brilliant finish, excellent for fittings and valves.',
+    continuousServiceTempC: 200,
+    frictionCoefficient: 0.30,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 47.1,
+    chemicalResistanceSummary: 'Resistant to tap water, non-oxidizing acids; avoid ammonia and mercury compounds.',
+    wearResistanceRating: 'Moderate'
+  },
+  {
+    id: 'copper-c101',
+    name: 'Oxygen-Free Copper (C10100)',
+    category: 'Copper/Brass',
+    densityGPerCm3: 8.94,
+    machinabilityIndex: 30, // gummy
+    mrrReferenceMm3PerMin: 14000,
+    typicalRawPricePerKg: 1120, // ₹1,120/kg
+    scrapValueRatio: 0.70,
+    yieldStrengthMpa: 70,
+    tensileStrengthMpa: 220,
+    corrosionResistance: 'Good',
+    hardnessHb: 65,
+    thermalConductivityWPerMK: 391,
+    description: '99.99% pure copper. Supreme thermal and electrical conductivity, highly ductile, gummy during chip formation.',
+    continuousServiceTempC: 250,
+    frictionCoefficient: 0.50,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 24.6,
+    chemicalResistanceSummary: 'Good atmospheric patina protection; attacked by nitric acid and ammonia.',
+    wearResistanceRating: 'Low'
+  },
+  {
+    id: 'titanium-gr5',
+    name: 'Titanium Grade 5 (Ti-6Al-4V)',
+    category: 'Titanium',
+    densityGPerCm3: 4.43,
+    machinabilityIndex: 22, // low thermal conductivity
+    mrrReferenceMm3PerMin: 9000,
+    typicalRawPricePerKg: 3300, // ₹3,300/kg
+    scrapValueRatio: 0.20,
+    yieldStrengthMpa: 880,
+    tensileStrengthMpa: 950,
+    corrosionResistance: 'Extreme / Inert',
+    hardnessHb: 330,
+    thermalConductivityWPerMK: 6.7,
+    description: 'Alpha-beta aerospace titanium alloy. Exceptional strength-to-weight, high temperature retention, biocompatible, difficult to machine.',
+    continuousServiceTempC: 400,
+    frictionCoefficient: 0.40,
+    isPolymer: false,
+    is3DPrintable: false,
+    suitableParadigm: 'Metal + Machining',
+    strengthToWeightRatio: 214.4,
+    chemicalResistanceSummary: 'Passivating titanium dioxide film renders it immune to ocean seawater, body fluids, and chlorine.',
+    wearResistanceRating: 'High'
+  },
+
+  // --- INDUSTRIAL PLASTICS & POLYMERS (COMMODITY & ENGINEERING) ---
+  {
+    id: 'abs-plastic',
+    name: 'ABS (Acrylonitrile Butadiene Styrene)',
+    category: 'Engineering Plastics',
+    densityGPerCm3: 1.05,
+    machinabilityIndex: 260,
+    mrrReferenceMm3PerMin: 180000,
+    typicalRawPricePerKg: 240, // ₹240/kg
+    scrapValueRatio: 0.05,
+    yieldStrengthMpa: 40,
+    tensileStrengthMpa: 45,
+    corrosionResistance: 'Excellent',
+    hardnessHb: 65,
+    thermalConductivityWPerMK: 0.17,
+    description: 'Rigid impact-resistant thermoplastic. Low density, easy to machine, staple material for FDM 3D printing and high-volume injection molding.',
+    continuousServiceTempC: 80,
+    frictionCoefficient: 0.35,
+    isPolymer: true,
+    is3DPrintable: true,
+    suitableParadigm: 'Plastic + 3D Printing',
+    strengthToWeightRatio: 42.9,
+    chemicalResistanceSummary: 'Resistant to aqueous acids, alkalis, animal and vegetable oils; attacked by acetone and chlorinated solvents.',
+    wearResistanceRating: 'Moderate'
+  },
+  {
+    id: 'pp-polypropylene',
+    name: 'Polypropylene (PP)',
+    category: 'Engineering Plastics',
+    densityGPerCm3: 0.90, // Ultra-lightweight (floats in water)
+    machinabilityIndex: 210,
+    mrrReferenceMm3PerMin: 150000,
+    typicalRawPricePerKg: 190, // ₹190/kg (highly economical)
+    scrapValueRatio: 0.04,
+    yieldStrengthMpa: 30,
+    tensileStrengthMpa: 35,
+    corrosionResistance: 'Excellent',
+    hardnessHb: 50,
+    thermalConductivityWPerMK: 0.12,
+    description: 'Semi-crystalline ultra-lightweight polymer. Outstanding fatigue life for living hinges, impervious to water/chemical washdowns, food safe.',
+    continuousServiceTempC: 95,
+    frictionCoefficient: 0.28,
+    isPolymer: true,
+    is3DPrintable: true,
+    suitableParadigm: 'Plastic + Injection Molding',
+    strengthToWeightRatio: 38.9,
+    chemicalResistanceSummary: 'Exceptional chemical resistance against aggressive acids, caustics, and alcohols; zero water absorption.',
+    wearResistanceRating: 'Moderate'
+  },
+  {
+    id: 'nylon-pa6',
+    name: 'Nylon 6 / PA6 (Polyamide)',
+    category: 'Engineering Plastics',
+    densityGPerCm3: 1.14,
+    machinabilityIndex: 200,
+    mrrReferenceMm3PerMin: 140000,
+    typicalRawPricePerKg: 460, // ₹460/kg
+    scrapValueRatio: 0.05,
+    yieldStrengthMpa: 70,
+    tensileStrengthMpa: 80,
+    corrosionResistance: 'Good',
+    hardnessHb: 75,
+    thermalConductivityWPerMK: 0.28,
+    description: 'Tough, shock-absorbing engineering polyamide. Outstanding natural lubricity, high mechanical damping, industry standard for SLS/FDM 3D printing and CNC machined gears.',
+    continuousServiceTempC: 130,
+    frictionCoefficient: 0.24,
+    isPolymer: true,
+    is3DPrintable: true,
+    suitableParadigm: 'Plastic + 3D Printing',
+    strengthToWeightRatio: 70.2,
+    chemicalResistanceSummary: 'Resistant to fuels, grease, solvents, and bases; absorbs atmospheric moisture which increases toughness.',
+    wearResistanceRating: 'High'
+  },
+  {
+    id: 'delrin-pom',
+    name: 'Acetal / Delrin (POM)',
+    category: 'Engineering Plastics',
+    densityGPerCm3: 1.41,
+    machinabilityIndex: 250,
+    mrrReferenceMm3PerMin: 160000,
+    typicalRawPricePerKg: 540, // ₹540/kg
+    scrapValueRatio: 0.05,
+    yieldStrengthMpa: 65,
+    tensileStrengthMpa: 70,
+    corrosionResistance: 'Excellent',
+    hardnessHb: 85,
+    thermalConductivityWPerMK: 0.23,
+    description: 'High-stiffness dimensional engineering polymer. Zero moisture uptake, crisp chip formation, widely CNC machined and molded for precision gears and sliding mechanisms.',
+    continuousServiceTempC: 100,
+    frictionCoefficient: 0.20,
+    isPolymer: true,
+    is3DPrintable: false,
+    suitableParadigm: 'Plastic + Injection Molding',
+    strengthToWeightRatio: 49.6,
+    chemicalResistanceSummary: 'Impervious to solvents, fuels, lubricants; degraded by strong mineral acids and oxidizers.',
+    wearResistanceRating: 'High'
+  },
+  {
+    id: 'uhmwpe',
+    name: 'UHMW-PE (Ultra-High Molecular Weight Polyethylene)',
+    category: 'Engineering Plastics',
+    densityGPerCm3: 0.94,
+    machinabilityIndex: 180,
+    mrrReferenceMm3PerMin: 120000,
+    typicalRawPricePerKg: 580, // ₹580/kg
+    scrapValueRatio: 0.03,
+    yieldStrengthMpa: 25,
+    tensileStrengthMpa: 40,
+    corrosionResistance: 'Extreme / Inert',
+    hardnessHb: 45,
+    thermalConductivityWPerMK: 0.41,
+    description: 'Supreme impact and abrasive wear resistance. Lowest coefficient of friction among solid polymers (rivals PTFE), zero water uptake, self-lubricating for conveyor guides and chutes.',
+    continuousServiceTempC: 85,
+    frictionCoefficient: 0.12,
+    isPolymer: true,
+    is3DPrintable: false,
+    suitableParadigm: 'Plastic + 3D Printing',
+    strengthToWeightRatio: 42.5,
+    chemicalResistanceSummary: 'Inert to almost all industrial acids, alkalis, and organic solvents; zero moisture swell.',
+    wearResistanceRating: 'Supreme / Self-Lubricating'
+  },
+  {
+    id: 'ptfe-teflon',
+    name: 'PTFE (Teflon / Polytetrafluoroethylene)',
+    category: 'High-Performance Polymers',
+    densityGPerCm3: 2.16,
+    machinabilityIndex: 240,
+    mrrReferenceMm3PerMin: 150000,
+    typicalRawPricePerKg: 1650, // ₹1,650/kg
+    scrapValueRatio: 0.02,
+    yieldStrengthMpa: 20,
+    tensileStrengthMpa: 30,
+    corrosionResistance: 'Extreme / Inert',
+    hardnessHb: 40,
+    thermalConductivityWPerMK: 0.25,
+    description: 'Ultimate chemical inertness and lowest friction coefficient (0.05). Continuous service to 260°C, zero water absorption, supreme dielectric insulator for cryogenic and chemical valves.',
+    continuousServiceTempC: 260,
+    frictionCoefficient: 0.05,
+    isPolymer: true,
+    is3DPrintable: false,
+    suitableParadigm: 'Advanced Polymer + 3D Printing',
+    strengthToWeightRatio: 13.9,
+    chemicalResistanceSummary: 'Universal chemical inertness; resists all acids, aqua regia, solvents, and bases except molten alkali metals.',
+    wearResistanceRating: 'Supreme / Self-Lubricating'
+  },
+  {
+    id: 'polycarbonate-pc',
+    name: 'Polycarbonate (PC)',
+    category: 'Engineering Plastics',
+    densityGPerCm3: 1.20,
+    machinabilityIndex: 220,
+    mrrReferenceMm3PerMin: 160000,
+    typicalRawPricePerKg: 390, // ₹390/kg
+    scrapValueRatio: 0.04,
+    yieldStrengthMpa: 62,
+    tensileStrengthMpa: 65,
+    corrosionResistance: 'Good',
+    hardnessHb: 70,
+    thermalConductivityWPerMK: 0.20,
+    description: 'High optical clarity, virtually unbreakable structural plastic. Excellent heat deflection (135°C), high dimensional accuracy, favored for safety enclosures, headlights, and 3D printing.',
+    continuousServiceTempC: 125,
+    frictionCoefficient: 0.32,
+    isPolymer: true,
+    is3DPrintable: true,
+    suitableParadigm: 'Plastic + 3D Printing',
+    strengthToWeightRatio: 54.2,
+    chemicalResistanceSummary: 'Good resistance to dilute acids and oils; sensitive to aromatic hydrocarbons and alkaline cleaning agents.',
+    wearResistanceRating: 'Moderate'
+  },
+
+  // --- ADVANCED HIGH-PERFORMANCE & COMPOSITE POLYMERS ---
+  {
+    id: 'peek',
+    name: 'PEEK (Polyether Ether Ketone)',
+    category: 'High-Performance Polymers',
+    densityGPerCm3: 1.32,
+    machinabilityIndex: 140,
+    mrrReferenceMm3PerMin: 80000,
+    typicalRawPricePerKg: 8200, // ₹8,200/kg (High-value aerospace polymer)
+    scrapValueRatio: 0.02,
+    yieldStrengthMpa: 100,
+    tensileStrengthMpa: 110,
+    corrosionResistance: 'Extreme / Inert',
+    hardnessHb: 100,
+    thermalConductivityWPerMK: 0.25,
+    description: 'Ultra-high performance semi-crystalline polymer. Continuous service to 250°C (300°C short-term), steam autoclave and radiation resistant, direct metal replacement for extreme aerospace and medical implants.',
+    continuousServiceTempC: 250,
+    frictionCoefficient: 0.22,
+    isPolymer: true,
+    is3DPrintable: true,
+    suitableParadigm: 'Advanced Polymer + 3D Printing',
+    strengthToWeightRatio: 83.3,
+    chemicalResistanceSummary: 'Extreme chemical resistance; unaffected by steam, superheated water, solvents, and concentrated acids except concentrated sulfuric acid.',
+    wearResistanceRating: 'High'
+  },
+  {
+    id: 'cf-nylon-pa12',
+    name: 'Carbon-Fiber Reinforced Nylon (PA-CF / CF-Nylon)',
+    category: 'Composite Polymers',
+    densityGPerCm3: 1.25,
+    machinabilityIndex: 170,
+    mrrReferenceMm3PerMin: 110000,
+    typicalRawPricePerKg: 1850, // ₹1,850/kg
+    scrapValueRatio: 0.03,
+    yieldStrengthMpa: 125,
+    tensileStrengthMpa: 140,
+    corrosionResistance: 'Excellent',
+    hardnessHb: 90,
+    thermalConductivityWPerMK: 0.45,
+    description: 'High-modulus carbon-fiber reinforced composite polymer. Matches the specific stiffness of cast aluminum and magnesium at 60% lower mass. Optimized for advanced additive manufacturing (FDM/SLS) and lightweight UAV arms.',
+    continuousServiceTempC: 155,
+    frictionCoefficient: 0.20,
+    isPolymer: true,
+    is3DPrintable: true,
+    suitableParadigm: 'Advanced Polymer + 3D Printing',
+    strengthToWeightRatio: 112.0,
+    chemicalResistanceSummary: 'Outstanding resistance to oils, hydraulic fluids, and fuels; carbon fiber matrix provides static dissipation and thermal stability.',
+    wearResistanceRating: 'High'
+  }
+];
+
+export function getMaterialById(id: string): MaterialProperties | undefined {
+  return STANDARD_MATERIALS.find(m => m.id === id);
+}
+
+export function getDefaultMaterial(): MaterialProperties {
+  return STANDARD_MATERIALS[0]; // Aluminum 6061-T6
+}
+
+export function getMaterialsByCategory(category: string): MaterialProperties[] {
+  return STANDARD_MATERIALS.filter(m => m.category === category);
+}
+
+export function getPolymersAndPlastics(): MaterialProperties[] {
+  return STANDARD_MATERIALS.filter(m => m.isPolymer);
+}
+
+export function get3DPrintableMaterials(): MaterialProperties[] {
+  return STANDARD_MATERIALS.filter(m => m.is3DPrintable);
+}
